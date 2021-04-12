@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <title>番禺区退役军人信息管理平台</title>
+
+    <link href="css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=2.2.0" rel="stylesheet">
+    <style>
+        .ibox-title {
+            border: 0;
+        }
+
+        .ibox-title h5 {
+            font-size: 14px;
+            margin: 0 10px;
+
+        }
+
+        .ibox-content {
+            border: 0;
+        }
+
+        .row .title {
+            color: #445DDC;
+        }
+
+        .ibox-title h6 {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 12px;
+            margin: 0 8px;
+        }
+
+        .row_one>div {
+            border: 0;
+            border-radius: 8px;
+        }
+
+        .con>div,
+        .con2>div {
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .con2>div h3,
+        .con2>div span {
+            font-size: 16px;
+        }
+
+        .con2>div:nth-child(1) h3,
+        .con2>div:nth-child(1) span {
+            color: #C3C8D5;
+        }
+
+        .con2>div:nth-child(1) p {
+            color: #445DDC;
+        }
+
+        .con2>div:nth-child(2) h3,
+        .con2>div:nth-child(2) span {
+            color: #65708A;
+        }
+
+        .con2>div:nth-child(2) p {
+            color: #C3C8D5;
+        }
+
+        .content {
+            padding: 0;
+        }
+
+        .content h3 {
+            font-size: 36px;
+            display: inline-block;
+            color: #304167;
+        }
+
+        .content p,
+        .content span {
+            color: #C3C8D5;
+        }
+
+        .bottom-row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .bottom-row>div {
+            width: 13%;
+            margin: 8px;
+            box-sizing: border-box;
+            background-color: #FFFFFF;
+            color: #65708A;
+            cursor: pointer;
+        }
+
+        .bottom-row>div h1 {
+            margin: 10px 0;
+            font-size: 16px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .bottom-row>div.p-lg {
+            padding: 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="wrapper" style="height: 100%;">
+        <nav style="height: 100%; background-color: #0E5A43;" class="navbar-default navbar-static-side"
+            role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li
+                        style="padding: 30px 15px; font-size: 14px; color: #fff; font-family: 'Courier New', Courier, monospace; font-weight: 600;">
+                        <span class="title">番禺区退役军人信息管理平台</span>
+                    </li>
+                    <li class="active">
+                        <a href="index.html">
+                            <i class="fa fa-home"></i>
+                            <span class="nav-label">首页</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">待办业务</span><span
+                                class="fa arrow"></span></a>
+                        <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">军人信息管理</span><span
+                                class="fa arrow"></span></a>
+                        <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">军人优抚管理</span><span
+                                class="fa arrow"></span></a>
+                        <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">军转信息管理</span><span
+                                class="fa arrow"></span></a>
+                        <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">安置接收管理</span><span
+                                class="fa arrow"></span></a>
+                        <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">信息发布管理</span><span
+                                class="fa arrow"></span></a>
+                        <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">数据统计分析</span><span
+                                class="fa arrow"></span></a>
+                        <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">系统管理</span><span
+                                class="fa arrow"></span></a>
+                        <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" style="min-height: 100%; background-color: #EDF1F9; overflow: hidden;"
+            class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0; height: 50px;">
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li>
+                            <span class="m-r-sm text-muted welcome-message">
+                                <a href="index.html" title="返回首页">
+                                    <img alt="image" style="width: 20px; height: 20px;" class="img-circle"
+                                        src="img/profile_small.jpg" />
+                                </a>我叫管理员
+                            </span>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
+                                <img alt="image" class="img-circle" src="./icon/下三角形.png" />
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="form_avatar.html">修改头像</a>
+                                </li>
+                                <li><a href="profile.html">个人资料</a>
+                                </li>
+                                <li><a href="contacts.html">联系我们</a>
+                                </li>
+                                <li><a href="mailbox.html">信箱</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href="login.html">安全退出</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="login.html">
+                                <img width="14px" height="14px" src="./icon/组 2.png" alt="">
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row">
+                <div class="ibox-title" style="border: 0; background-color: transparent;">
+                    <h5>数据概览</h5>
+                    <h6>更新时间</h6>
+                    <h6>2020-12-01</h6>
+                    <h6>14:30:05</h6>
+                    <h6>
+                        <img style="display: inline-block;" class="img-responsive" src="./icon/刷新.png" alt="">
+                    </h6>
+                </div>
+            </div>
+
+            <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0; height: 100%;">
+                <div class="row row_one">
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title title">
+                                <h5>优抚总人数</h5>
+                            </div>
+                            <div class="ibox-content content">
+                                <div class="row con">
+                                    <div class="col-lg-6">
+                                        <p>优抚总人数</p>
+                                        <h3>4680</h3>
+                                        <span>人</span>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <p>年度新增人数</p>
+                                        <h3>600</h3>
+                                        <span>人</span>
+                                    </div>
+                                </div>
+
+                                <div class="row con2">
+                                    <div class="col-lg-6">
+                                        <p>已发补贴人数</p>
+                                        <h3>4080</h3>
+                                        <span>位</span>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <p>未发补贴人数</p>
+                                        <h3>600</h3>
+                                        <span>位</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title title">
+                                <h5>军转总人数</h5>
+                            </div>
+                            <div class="ibox-content content">
+                                <div class="row con">
+                                    <div class="col-lg-6">
+                                        <p>优抚总人数</p>
+                                        <h3>4680</h3>
+                                        <span>人</span>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <p>年度新增人数</p>
+                                        <h3>600</h3>
+                                        <span>人</span>
+                                    </div>
+                                </div>
+
+                                <div class="row con2">
+                                    <div class="col-lg-6">
+                                        <p>已发补贴人数</p>
+                                        <h3>1080</h3>
+                                        <span>位</span>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <p>未发补贴人数</p>
+                                        <h3>600</h3>
+                                        <span>位</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title title">
+                                <h5>安置总人数</h5>
+                            </div>
+                            <div class="ibox-content content">
+                                <div class="row con">
+                                    <div class="col-lg-6">
+                                        <p>优抚总人数</p>
+                                        <h3>4680</h3>
+                                        <span>人</span>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <p>年度新增人数</p>
+                                        <h3>600</h3>
+                                        <span>人</span>
+                                    </div>
+                                </div>
+
+                                <div class="row con2">
+                                    <div class="col-lg-6">
+                                        <p>已发补贴人数</p>
+                                        <h3>2080</h3>
+                                        <span>位</span>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <p>未发补贴人数</p>
+                                        <h3>600</h3>
+                                        <span>位</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <div class="ibox-title">
+                                    <h5 style="color: #445DDC;">优抚总人数</h5>
+                                </div>
+                                <div id="morris-one-line-chart" style="max-height: 195px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                <div class="echarts" id="echarts-line-chart" style="height: 243px; width: 350px;"></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="bottom-row">
+                    <div class="widget yellow-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h1 class="m-xs">伤残人员</h1>
+                            <img src="./icon/组 982.png" alt="">
+                        </div>
+                    </div>
+
+                    <div class="widget yellow-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h1 class="m-xs">三属</h1>
+                            <img src="./icon/组 983.png" alt="">
+                        </div>
+                    </div>
+
+                    <div class="widget yellow-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h1 class="m-xs">复员军人</h1>
+                            <img src="./icon/组 984.png " alt="">
+                        </div>
+                    </div>
+
+                    <div class="widget yellow-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h1 class="m-xs">回乡退伍军人</h1>
+                            <img src="./icon/组 985.png" alt="">
+                        </div>
+                    </div>
+
+                    <div class="widget yellow-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h1 class="m-xs">60岁以上退役军人</h1>
+                            <img src="./icon/组 986.png" alt="">
+                        </div>
+                    </div>
+
+                    <div class="widget yellow-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h1 class="m-xs">铀矿开采退役人员</h1>
+                            <img src="./icon/组 987.png" alt="">
+                        </div>
+                    </div>
+
+                    <div class="widget yellow-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h1 class="m-xs">五老人员</h1>
+                            <img src="./icon/组 988.png" alt="">
+                        </div>
+                    </div>
+
+                    <div class="widget yellow-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h1 class="m-xs">五老人员</h1>
+                            <img src="./icon/组 989.png" alt="">
+                        </div>
+                    </div>
+
+                    <div class="widget yellow-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h1 class="m-xs">无军籍人员</h1>
+                            <img src="./icon/组 990.png" alt="">
+                        </div>
+                    </div>
+
+                    <div class="widget yellow-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h1 class="m-xs">其它人员</h1>
+                            <img src="./icon/组 991.png" alt="">
+                        </div>
+                    </div>
+
+                    <div class="widget yellow-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h1 class="m-xs">安置信息</h1>
+                            <img src="./icon/组 992.png" alt="">
+                        </div>
+                    </div>
+
+                    <div class="widget yellow-bg p-lg text-center">
+                        <div class="m-b-md">
+                            <h1 class="m-xs">退役临时补助</h1>
+                            <img src="./icon/组 993.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Morris -->
+    <script src="js/plugins/morris/raphael-2.1.0.min.js"></script>
+    <script src="js/plugins/morris/morris.js"></script>
+
+    <!-- ECharts -->
+    <script src="js/plugins/echarts/echarts-all.js"></script>
+
+    <script src="js/plugins/pace/pace.min.js"></script>
+
+    <!-- Morris demo data-->
+    <script src="js/demo/morris-demo.js"></script>
+
+
+    <script>
+
+        var lineChart = echarts.init(document.getElementById("echarts-line-chart"));
+        var lineoption = {
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed'],
+                axisLabel: {show: false, interval: 0},
+                splitLine: {
+                    show: false
+                },
+                axisLine: {
+                    show: true,
+                    lineStyle: {
+                        type: 'solid',
+                        color: '#ccc',
+                        width: 1
+                    }
+                },
+                axisTick: {
+                    show: false
+                }
+            },
+            yAxis: [{
+                type: 'value',
+                splitLine: {show: false},
+                axisLabel: {show: false},
+                axisLine: {show: false}
+            }],
+            grid: {
+                show: 'true',
+                borderWidth: 0,
+                height: 150
+            },
+            series: [{
+                data: [4680, 1680, 2680],
+                type: 'bar',
+                barWidth: 30,
+                itemStyle: {
+                    normal: {
+                        barBorderRadius: [6, 6, 0, 0],
+                        label: {
+                            show: true,
+                            position: 'top',
+                            textStyle: {
+                                color: '#000'
+                            }
+                        },
+                        color: function(params, index) {
+                            const colorList = ['#5654F5', '#4CA8FF', '#FBA33F']
+                            return colorList[index]
+                        }
+                    },
+                    color: '#5654F5',
+                }
+            }]
+        };
+        lineChart.setOption(lineoption);
+    </script>
+
+</body>
+
+</html>
