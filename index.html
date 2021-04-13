@@ -15,8 +15,19 @@
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css?v=2.2.0" rel="stylesheet">
     <style>
+        .navbar-default {
+            height: 100%;
+            background: #0E5A43;
+            box-shadow: 11px 4px 6px rgba(101, 112, 138, 0.1);
+            opacity: 1;
+        }
+
         .ibox-title {
             border: 0;
+        }
+
+        .ibox-title.one-title {
+            padding-bottom: 0;
         }
 
         .ibox-title h5 {
@@ -27,6 +38,10 @@
 
         .ibox-content {
             border: 0;
+        }
+
+        .ibox-content.one-line {
+            padding: 0;
         }
 
         .row .title {
@@ -118,8 +133,7 @@
 
 <body>
     <div id="wrapper" style="height: 100%;">
-        <nav style="height: 100%; background-color: #0E5A43;" class="navbar-default navbar-static-side"
-            role="navigation">
+        <nav class="navbar-default navbar-static-side" role="navigation">
             <div class="sidebar-collapse">
                 <ul class="nav" id="side-menu">
                     <li
@@ -426,22 +440,19 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="ibox float-e-margins">
-                            <div class="ibox-content">
-                                <div class="ibox-title">
-                                    <h5 style="color: #445DDC;">优抚总人数</h5>
-                                </div>
-                                <div id="morris-one-line-chart" style="max-height: 195px;"></div>
+                            <div class="ibox-content one-line">
+                                <div class="echarts" id="one-line-chart"></div>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-lg-6">
                         <div class="ibox float-e-margins">
-                            <div class="ibox-content">
-                                <div class="echarts" id="echarts-line-chart" style="height: 243px; width: 350px;"></div>
+                            <div class="ibox-content one-line">
+                                <div class="echarts" id="echarts-line-chart"></div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -540,30 +551,130 @@
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <!-- Morris -->
-    <script src="js/plugins/morris/raphael-2.1.0.min.js"></script>
-    <script src="js/plugins/morris/morris.js"></script>
-
     <!-- ECharts -->
     <script src="js/plugins/echarts/echarts-all.js"></script>
 
     <script src="js/plugins/pace/pace.min.js"></script>
 
-    <!-- Morris demo data-->
-    <script src="js/demo/morris-demo.js"></script>
-
-
     <script>
 
-        var lineChart = echarts.init(document.getElementById("echarts-line-chart"));
-        var lineoption = {
+        // 左侧数据
+        var oneChart = echarts.init(document.getElementById("one-line-chart"))
+        var oneoption = {
+            title: {
+                show: true,
+                text: '优抚总人数',
+                x: 24,
+                y: 16,
+                textStyle: {
+                    fontFamily: 'Source Han Sans CN',
+                    fontSize: 20,
+                    color: '#445DDC',
+                    lineHeight: 34,
+
+                }
+            },
             xAxis: {
                 type: 'category',
-                data: ['Mon', 'Tue', 'Wed'],
-                axisLabel: {show: false, interval: 0},
+                data: ['2014', '2015', '2016', '2017', '2018', '2019', '2020'],
+                splitLine: { show: false },
+                axisTick: { show: false },
+                axisLine: {
+                    lineStyle: {
+                        type: 'solid',
+                        color: '#ccc',
+                        width: 1
+                    }
+                },
+                axisLabel: {
+                    interval: 0,
+                    margin: 14,
+                    textStyle: {
+                        color: '#65708A',
+                    }
+                }
+            },
+            yAxis: {
+                type: 'value',
+                scale: true,
+                max: 5000,
+                min: 0,
+                interval: 50,
+                splitNumber: 5,
+                axisLabel: {
+                    interval: 0,
+                    margin: 14,
+                    // 函数模板
+                    formatter(value) {
+                        var result = ""
+                        switch (value) {
+                            case 1000:
+                                result = value
+                                break;
+                            case 2000:
+                                result = value
+                                break;
+                            case 3000:
+                                result = value
+                                break;
+                            case 4000:
+                                result = value
+                                break;
+                        }
+                        return result;
+                    },
+                    textStyle: {
+                        color: '#65708A'
+                    }
+                },
                 splitLine: {
+                    lineStyle: {
+                        type: 'dashed',
+                        color: 'rgba(221, 221, 221, 0.5)'
+                    }
+                },
+                axisTick: {
                     show: false
                 },
+                axisLine: { show: false }
+            },
+            grid: {
+                show: 'false',
+                borderWidth: 0,
+                height: 100,
+                containLabel: true,
+            },
+            series: [{
+                type: 'line',
+                data: [1000, 2100, 1000, 3200, 800, 2000, 4680],
+                smooth: true,
+                itemStyle: {
+                    normal: {
+                        color: '#407AFF', // 改变折线点颜色
+                        borderWidth: 8,
+                        borderColor: 'rgba(64, 122, 255, 0.38)',
+                        label: {
+                            show: true,
+                            formatter(name, value, params) {
+                                if(params == 4680) {
+                                    return params + "人"
+                                }
+                            }
+                        }
+                    },
+                }
+            }]
+        }
+        oneChart.setOption(oneoption)
+
+        // 右侧数据
+        const lineChart = echarts.init(document.getElementById("echarts-line-chart"))
+        const lineoption = {
+            xAxis: {
+                type: 'category',
+                data: ['优抚总人数', '军转总人数', '安置总人数'],
+                axisLabel: { show: true },
+                splitLine: { show: false},
                 axisLine: {
                     show: true,
                     lineStyle: {
@@ -572,47 +683,63 @@
                         width: 1
                     }
                 },
-                axisTick: {
-                    show: false
-                }
+                axisTick: { show: false}
             },
             yAxis: [{
                 type: 'value',
-                splitLine: {show: false},
-                axisLabel: {show: false},
-                axisLine: {show: false}
+                splitLine: { show: false },
+                axisLabel: { show: false },
+                axisLine: { show: false }
             }],
+            legend: {
+                data: ['优抚总人数', '军转总人数', '安置总人数'],
+                orient: 'vertical',
+                y: 'center',
+                x: 'right',
+                padding: [0, 128, 0, 0],
+                itemGap: 18,
+                align: 'left',
+                textStyle: {
+                    color: '#000',
+                    fontSize: 14,
+                    fontFamily: 'Source Han Sans CN',
+                    fontWeight: 'bold'
+                }
+            },
             grid: {
-                show: 'true',
                 borderWidth: 0,
+                width: 200,
                 height: 150
             },
-            series: [{
-                data: [4680, 1680, 2680],
-                type: 'bar',
-                barWidth: 30,
-                itemStyle: {
-                    normal: {
-                        barBorderRadius: [6, 6, 0, 0],
-                        label: {
-                            show: true,
-                            position: 'top',
-                            textStyle: {
-                                color: '#000'
+            series: [
+                {
+                    data: [4680, 1680, 2680],
+                    type: 'bar',
+                    width: '200',
+                    barWidth: 30,
+                    itemStyle: {
+                        normal: {
+                            barBorderRadius: [6, 6, 0, 0],
+                            label: {
+                                show: true,
+                                position: 'top',
+                                textStyle: {
+                                    color: '#000'
+                                }
+                            },
+                            color: function (params, index) {
+                                const colorList = ['#5654F5', '#4CA8FF', '#FBA33F']
+                                return colorList[index]
                             }
                         },
-                        color: function(params, index) {
-                            const colorList = ['#5654F5', '#4CA8FF', '#FBA33F']
-                            return colorList[index]
-                        }
-                    },
-                    color: '#5654F5',
+                        color: '#5654F5',
+                    }
                 }
-            }]
+            ]
         };
-        lineChart.setOption(lineoption);
-    </script>
+        lineChart.setOption(lineoption)
 
+    </script>
 </body>
 
 </html>
