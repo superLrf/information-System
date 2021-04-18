@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <title>待审批业务</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="../css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="../js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="../css/animate.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+
+    <style>
+
+        .navbar-default {
+        height: 100%;
+        background: #0E5A43;
+        box-shadow: 11px 4px 6px rgba(101, 112, 138, 0.1);
+        opacity: 1;
+        }
+
+        /* 局内样式 */
+
+        .row_form {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 24px 0 32px 25px;
+        }
+
+        .row_table .ibox-title {
+            border-style: none;
+            padding: 15px 0 20px 30px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .row_table .ibox-title h5 {
+            display: block;
+            margin: 0;
+            float: none;
+            font-size: 14px;
+            font-family: Microsoft YaHei;
+            color: #65708A;
+            font-weight: bold;
+            position: relative;
+            height: 24px;
+            line-height: 24px;
+        }
+
+        .row_table .ibox-title h5::before {
+            content: '';
+            display: inline-block;
+            width: 3px;
+            height: 16px;
+            background-color: #445DDC;
+            margin-right: 10px;
+            vertical-align: sub;
+        }
+
+        .row_table .ibox-content {
+            border-style: none;
+            padding: 0;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .row_table .ibox-content .table {
+            margin: 0;
+        }
+
+        .row_table .ibox-content .table, th {
+            text-align: center;
+        }
+
+        .row_table .ibox-content .table > thead > tr {
+            background-color: rgba(246, 248, 251, 1);
+            color: rgba(195, 200, 213, 1);
+        }
+
+        .row_table .ibox-content .table > thead > tr > th {
+            padding: 0;
+            border: 0;
+            margin: 0;
+        }
+
+        .row_table .ibox-content .table > thead > tr > th:nth-of-type(1) {
+            padding-left: 20px;
+        }
+
+        .table > tbody > tr:nth-of-type(even) {
+            background-color: rgba(246, 248, 251, 1);
+        }
+
+        .table > tbody > tr:nth-of-type(odd) {
+            background-color: transparent;
+        }
+
+        .row_table .ibox-content .table tr td {
+            color: #65708A;
+        }
+
+        .row_table .ibox-content .table tr td:nth-of-type(1) {
+            padding-left: 20px;
+        }
+
+
+        .row_table .ibox-content .table tbody tr td.time p {
+            margin: 0;
+        }
+
+        .row_table .ibox-content .table tbody tr td.time p span {
+            display: block;
+            line-height: 30px;
+        }
+
+
+        .row_table .ibox-content .table tr td, .row_table .ibox-content .table tr th{
+            font-size: 12px;
+            font-weight: 600;
+            font-family: Source Han Sans CN;
+            padding: 0;
+            border: 0;
+            height: 60px;
+            line-height: 60px;
+        }
+
+        .row_table .ibox-content .table tbody tr td.no_app {
+            color: #DC4444;
+        }
+
+        .row_table .ibox-content .table tbody tr td.pass_app {
+            color: #445DDC;
+            font-weight: bold;
+        }
+
+        .col-lg-3 {
+            width: auto;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="wrapper" style="height: 100%;">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li
+                        style="padding: 30px 15px; font-size: 14px; color: #fff; font-family: 'Courier New', Courier, monospace; font-weight: 600;">
+                        <span class="title">番禺区退役军人信息管理平台</span>
+                    </li>
+                    <li>
+                        <a href="../index.html"><i class="fa fa-th-large"></i> <span class="nav-label">首页</span></a>
+                    </li>
+                    <li class="active">
+                        <a href="index.html"><i class="fa fa-files-o"></i> <span class="nav-label">待办业务</span><span
+                                class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li><a href="./examine.html">待审核业务</a></li>
+                            <li class="active"><a href="./approval.html">待审批业务</a></li>
+                            <li><a href="./processed.html">已处理记录</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">军人信息管理</span><span
+                                class="fa arrow"></span></a>
+                        <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="../index.html#"><i class="fa fa-files-o"></i> <span
+                                class="nav-label">军人优抚管理</span><span class="fa arrow"></span></a>
+                        <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">军转信息管理</span><span
+                                class="fa arrow"></span></a>
+                        <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">安置接收管理</span><span
+                                class="fa arrow"></span></a>
+                        <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">信息发布管理</span><span
+                                class="fa arrow"></span></a>
+                        <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">数据统计分析</span><span
+                                class="fa arrow"></span></a>
+                        <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">系统管理</span><span
+                                class="fa arrow"></span></a>
+                        <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" style="min-height: 100%; background-color: #EDF1F9; overflow: hidden;"
+            class="gray-bg dashbard-1">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0; height: 50px;">
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li>
+                            <span class="m-r-sm text-muted welcome-message">
+                                <a href="index.html" title="返回首页">
+                                    <img alt="image" style="width: 20px; height: 20px;" class="img-circle"
+                                        src="../img/profile_small.jpg" />
+                                </a>我叫管理员
+                            </span>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
+                                <img alt="image" class="img-circle" src="../icon/下三角形.png" />
+                            </a>
+                            <ul class="dropdown-menu animated fadeInUp m-t-xs">
+                                <li><a href="form_avatar.html">修改头像</a>
+                                </li>
+                                <li><a href="profile.html">个人资料</a>
+                                </li>
+                                <li><a href="contacts.html">联系我们</a>
+                                </li>
+                                <li><a href="mailbox.html">信箱</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><a href="login.html">安全退出</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="login.html">
+                                <img width="14px" height="14px" src="../icon/组 2.png" alt="">
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-9">
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="./approval.html">待办业务</a>
+                        </li>
+                        <li>
+                            <strong>待审批业务</strong>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="wrapper wrapper-content animated fadeInRight"
+                style="padding-top: 0; height: 100%; padding: 0 12px;">
+                <div class="row row_form">
+                    <div class="col-lg-8">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">人员姓名</label>
+
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" style="width: 212px; height: 32px;">
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-left: 30px;">
+                                <label class="col-lg-3 control-label">身份证号码</label>
+
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" style="width: 376px; height: 32px;">
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin: 0;">
+                                <label class="col-lg-3 control-label">申请时间</label>
+
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control layer-date" placeholder="2020-03-16"
+                                        onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin: 0; margin-left: 20px;">
+                                <div class="col-lg-offset-3 col-lg-8">
+                                    <button class="btn btn-sm btn-white" type="submit">查询</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin: 0; margin-left: 10px;">
+                                <div class="col-lg-offset-3 col-lg-8">
+                                    <button class="btn btn-sm btn-white" type="submit"
+                                        style="background: #E9EBF2; color: #65708A;">重置</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row row_table" style="margin-top: 20px;">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>待审批名单</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>序号</th>
+                                            <th>业务名称</th>
+                                            <th>人员名称</th>
+                                            <th>身份证号码</th>
+                                            <th>提交时间</th>
+                                            <th>提交人</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>01</td>
+                                            <td><span>军人优抚信息申请单</span></td>
+                                            <td>张三</td>
+                                            <td>450521199632165498</td>
+                                            <td class="time"><p>
+                                                <span>2020-12-03</span>
+                                                <span>14:30:56</span></p>
+                                            </td>
+                                            <td>村居人员</td>
+                                            <td class="no_app">待审核</td>
+                                            <td class="pass_app"><a href="./toExamine.html">立即审核</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>02</td>
+                                            <td><span>军人优抚信息申请单</span></td>
+                                            <td>张三</td>
+                                            <td>450521199632165498</td>
+                                            <td class="time"><p>
+                                                <span>2020-12-03</span>
+                                                <span>14:30:56</span></p>
+                                            </td>
+                                            <td>村居人员</td>
+                                            <td class="no_app">待审核</td>
+                                            <td class="pass_app"><a href="./toExamine.html">立即审核</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>03</td>
+                                            <td><span>军人优抚信息申请单</span></td>
+                                            <td>张三</td>
+                                            <td>450521199632165498</td>
+                                            <td class="time"><p>
+                                                <span>2020-12-03</span>
+                                                <span>14:30:56</span></p>
+                                            </td>
+                                            <td>村居人员</td>
+                                            <td class="no_app">待审核</td>
+                                            <td class="pass_app"><a href="./toExamine.html">立即审核</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>04</td>
+                                            <td><span>军人优抚信息申请单</span></td>
+                                            <td>张三</td>
+                                            <td>450521199632165498</td>
+                                            <td class="time"><p>
+                                                <span>2020-12-03</span>
+                                                <span>14:30:56</span></p>
+                                            </td>
+                                            <td>村居人员</td>
+                                            <td class="no_app">待审核</td>
+                                            <td class="pass_app"><a href="./toExamine.html">立即审核</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>05</td>
+                                            <td><span>军人优抚信息申请单</span></td>
+                                            <td>张三</td>
+                                            <td>450521199632165498</td>
+                                            <td class="time"><p>
+                                                <span>2020-12-03</span>
+                                                <span>14:30:56</span></p>
+                                            </td>
+                                            <td>村居人员</td>
+                                            <td class="no_app">待审核</td>
+                                            <td class="pass_app"><a href="./toExamine.html">立即审核</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>06</td>
+                                            <td><span>军人优抚信息申请单</span></td>
+                                            <td>张三</td>
+                                            <td>450521199632165498</td>
+                                            <td class="time"><p>
+                                                <span>2020-12-03</span>
+                                                <span>14:30:56</span></p>
+                                            </td>
+                                            <td>村居人员</td>
+                                            <td class="no_app">待审核</td>
+                                            <td class="pass_app"><a href="./toExamine.html">立即审核</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>07</td>
+                                            <td><span>军人优抚信息申请单</span></td>
+                                            <td>张三</td>
+                                            <td>450521199632165498</td>
+                                            <td class="time"><p>
+                                                <span>2020-12-03</span>
+                                                <span>14:30:56</span></p>
+                                            </td>
+                                            <td>村居人员</td>
+                                            <td class="no_app">待审核</td>
+                                            <td class="pass_app"><a href="./toExamine.html">立即审核</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>08</td>
+                                            <td><span>军人优抚信息申请单</span></td>
+                                            <td>张三</td>
+                                            <td>450521199632165498</td>
+                                            <td class="time"><p>
+                                                <span>2020-12-03</span>
+                                                <span>14:30:56</span></p>
+                                            </td>
+                                            <td>村居人员</td>
+                                            <td class="no_app">待审核</td>
+                                            <td class="pass_app"><a href="./toExamine.html">立即审核</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>09</td>
+                                            <td><span>军人优抚信息申请单</span></td>
+                                            <td>张三</td>
+                                            <td>450521199632165498</td>
+                                            <td class="time"><p>
+                                                <span>2020-12-03</span>
+                                                <span>14:30:56</span></p>
+                                            </td>
+                                            <td>村居人员</td>
+                                            <td class="no_app">待审核</td>
+                                            <td class="pass_app"><a href="./toExamine.html">立即审核</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td><span>军人优抚信息申请单</span></td>
+                                            <td>张三</td>
+                                            <td>450521199632165498</td>
+                                            <td class="time"><p>
+                                                <span>2020-12-03</span>
+                                                <span>14:30:56</span></p>
+                                            </td>
+                                            <td>村居人员</td>
+                                            <td class="no_app">待审核</td>
+                                            <td class="pass_app"><a href="./toExamine.html">立即审核</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>11</td>
+                                            <td><span>军人优抚信息申请单</span></td>
+                                            <td>张三</td>
+                                            <td>450521199632165498</td>
+                                            <td class="time"><p>
+                                                <span>2020-12-03</span>
+                                                <span>14:30:56</span></p>
+                                            </td>
+                                            <td>村居人员</td>
+                                            <td class="no_app">待审核</td>
+                                            <td class="pass_app"><a href="./toExamine.html">立即审核</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>12</td>
+                                            <td><span>军人优抚信息申请单</span></td>
+                                            <td>张三</td>
+                                            <td>450521199632165498</td>
+                                            <td class="time"><p>
+                                                <span>2020-12-03</span>
+                                                <span>14:30:56</span></p>
+                                            </td>
+                                            <td>村居人员</td>
+                                            <td class="no_app">待审核</td>
+                                            <td class="pass_app"><a href="./toExamine.html">立即审核</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>13</td>
+                                            <td><span>军人优抚信息申请单</span></td>
+                                            <td>张三</td>
+                                            <td>450521199632165498</td>
+                                            <td class="time"><p>
+                                                <span>2020-12-03</span>
+                                                <span>14:30:56</span></p>
+                                            </td>
+                                            <td>村居人员</td>
+                                            <td class="no_app">待审核</td>
+                                            <td class="pass_app"><a href="./toExamine.html">立即审核</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>14</td>
+                                            <td><span>军人优抚信息申请单</span></td>
+                                            <td>张三</td>
+                                            <td>450521199632165498</td>
+                                            <td class="time"><p>
+                                                <span>2020-12-03</span>
+                                                <span>14:30:56</span></p>
+                                            </td>
+                                            <td>村居人员</td>
+                                            <td class="no_app">待审核</td>
+                                            <td class="pass_app"><a href="./toExamine.html">立即审核</a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>15</td>
+                                            <td><span>军人优抚信息申请单</span></td>
+                                            <td>张三</td>
+                                            <td>450521199632165498</td>
+                                            <td class="time"><p>
+                                                <span>2020-12-03</span>
+                                                <span>14:30:56</span></p>
+                                            </td>
+                                            <td>村居人员</td>
+                                            <td class="no_app">待审核</td>
+                                            <td class="pass_app"><a href="./toExamine.html">立即审核</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <script src="../js/hplus.js"></script>
+    <script src="../js/plugins/pace/pace.min.js"></script>
+
+    <!-- layerDate plugin javascript -->
+    <script src="../js/plugins/layer/laydate/laydate.js"></script>
+
+    <script>
+        //外部js调用
+        laydate({
+            elem: '#hello', //目标元素。由于laydate.js封装了一个轻量级的选择器引擎，因此elem还允许你传入class、tag但必须按照这种方式 '#id .class'
+            event: 'focus' //响应事件。如果没有传入event，则按照默认的click
+        });
+
+        //日期范围限制
+        var start = {
+            elem: '#start',
+            format: 'YYYY/MM/DD hh:mm:ss',
+            min: laydate.now(), //设定最小日期为当前日期
+            max: '2099-06-16 23:59:59', //最大日期
+            istime: true,
+            istoday: false,
+            choose: function (datas) {
+                end.min = datas; //开始日选好后，重置结束日的最小日期
+                end.start = datas //将结束日的初始值设定为开始日
+            }
+        };
+
+        var end = {
+            elem: '#end',
+            format: 'YYYY/MM/DD hh:mm:ss',
+            min: laydate.now(),
+            max: '2099-06-16 23:59:59',
+            istime: true,
+            istoday: false,
+            choose: function (datas) {
+                start.max = datas; //结束日选好后，重置开始日的最大日期
+            }
+        };
+
+        laydate(start);
+        laydate(end);
+    </script>
+
+</body>
+
+</html>

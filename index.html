@@ -9,11 +9,18 @@
 
     <title>番禺区退役军人信息管理平台</title>
 
-    <link href="css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
-    <link href="font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Morris -->
+    <link href="css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
 
     <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=2.2.0" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    
     <style>
         .navbar-default {
             height: 100%;
@@ -24,6 +31,7 @@
 
         .ibox-title {
             border: 0;
+            border-radius: 6px 6px 0 0;
         }
 
         .ibox-title.one-title {
@@ -38,6 +46,7 @@
 
         .ibox-content {
             border: 0;
+            border-radius: 0 0 6px 6px;
         }
 
         .ibox-content.one-line {
@@ -45,7 +54,12 @@
         }
 
         .row .title {
+            padding: 24px;
             color: #445DDC;
+        }
+
+        .row .title h5 {
+            margin: 0;
         }
 
         .ibox-title h6 {
@@ -91,12 +105,22 @@
 
         .content {
             padding: 0;
+            padding-top: 25px;
         }
 
         .content h3 {
             font-size: 36px;
             display: inline-block;
             color: #304167;
+            margin: 0;
+        }
+
+        .content p {
+            font-size: 14px;
+            font-family: 'Source Han Sans CN';
+            font-weight: normal;
+            line-height: 27px;
+            margin-bottom: 6px;
         }
 
         .content p,
@@ -119,13 +143,27 @@
         }
 
         .bottom-row>div h1 {
-            margin: 10px 0;
+            margin: 0;
             font-size: 16px;
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         }
 
         .bottom-row>div.p-lg {
-            padding: 0;
+            padding: 22px 0;
+        }
+
+        .bottom-row>div.p-lg > div {
+            margin-bottom: 0;
+        }
+
+        .bottom-row>div.p-lg > div img {
+            margin-top: 18px;
+        }
+
+        .nav-second-level li{
+            padding: 10px 0;
+            background-color: rgba(9, 57, 59, 1);
+            box-sizing: border-box;
         }
     </style>
 
@@ -141,26 +179,16 @@
                         <span class="title">番禺区退役军人信息管理平台</span>
                     </li>
                     <li class="active">
-                        <a href="index.html">
-                            <i class="fa fa-home"></i>
-                            <span class="nav-label">首页</span>
-                        </a>
+                        <a href="index.html"><i class="fa fa-th-large"></i> <span class="nav-label">首页</span></a>
                     </li>
                     <li>
-                        <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">待办业务</span><span
+                        <a href="index.html"><i class="fa fa-files-o"></i> <span class="nav-label">待办业务</span><span
                                 class="fa arrow"></span></a>
-                        <!-- <ul class="nav nav-second-level">
-                            <li><a href="search_results.html">搜索结果</a>
-                            </li>
-                            <li><a href="lockscreen.html">登录超时</a>
-                            </li>
-                            <li><a href="404.html">404页面</a>
-                            </li>
-                            <li><a href="500.html">500页面</a>
-                            </li>
-                            <li><a href="empty_page.html">空白页</a>
-                            </li>
-                        </ul> -->
+                        <ul class="nav nav-second-level">
+                            <li><a href="#">待审核业务</a></li>
+                            <li><a href="./html/approval.html">待审批业务</a></li>
+                            <li><a href="#">已处理记录</a></li>
+                        </ul>
                     </li>
                     <li>
                         <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">军人信息管理</span><span
@@ -337,7 +365,7 @@
                             <div class="ibox-title title">
                                 <h5>优抚总人数</h5>
                             </div>
-                            <div class="ibox-content content">
+                            <div class="ibox-content content" style="padding-bottom: 24px;">
                                 <div class="row con">
                                     <div class="col-lg-6">
                                         <p>优抚总人数</p>
@@ -371,7 +399,7 @@
                             <div class="ibox-title title">
                                 <h5>军转总人数</h5>
                             </div>
-                            <div class="ibox-content content">
+                            <div class="ibox-content content" style="padding-bottom: 24px;">
                                 <div class="row con">
                                     <div class="col-lg-6">
                                         <p>优抚总人数</p>
@@ -405,7 +433,7 @@
                             <div class="ibox-title title">
                                 <h5>安置总人数</h5>
                             </div>
-                            <div class="ibox-content content">
+                            <div class="ibox-content content" style="padding-bottom: 24px;">
                                 <div class="row con">
                                     <div class="col-lg-6">
                                         <p>优抚总人数</p>
@@ -440,7 +468,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="ibox float-e-margins">
-                            <div class="ibox-content one-line">
+                            <div class="ibox-content one-line" style="border-radius: 6px;">
                                 <div class="echarts" id="one-line-chart"></div>
                             </div>
                         </div>
@@ -448,7 +476,7 @@
 
                     <div class="col-lg-6">
                         <div class="ibox float-e-margins">
-                            <div class="ibox-content one-line">
+                            <div class="ibox-content one-line" style="border-radius: 6px;">
                                 <div class="echarts" id="echarts-line-chart"></div>
                             </div>
                         </div>
@@ -548,12 +576,14 @@
 
     <!-- Mainly scripts -->
     <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
     <!-- ECharts -->
-    <script src="js/plugins/echarts/echarts-all.js"></script>
+    <script src="js/plugins/echarts/echarts.min.js"></script>
 
+    <script src="js/hplus.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
 
     <script>
@@ -571,7 +601,6 @@
                     fontSize: 20,
                     color: '#445DDC',
                     lineHeight: 34,
-
                 }
             },
             xAxis: {
@@ -579,30 +608,23 @@
                 data: ['2014', '2015', '2016', '2017', '2018', '2019', '2020'],
                 splitLine: { show: false },
                 axisTick: { show: false },
+                axisLabel: {
+                    textStyle: {
+                        color: 'rgba(101, 112, 138, 1)'
+                    },
+                    margin: 14,
+                },
                 axisLine: {
                     lineStyle: {
                         type: 'solid',
                         color: '#ccc',
                         width: 1
                     }
-                },
-                axisLabel: {
-                    interval: 0,
-                    margin: 14,
-                    textStyle: {
-                        color: '#65708A',
-                    }
                 }
             },
             yAxis: {
                 type: 'value',
-                scale: true,
-                max: 5000,
-                min: 0,
-                interval: 50,
-                splitNumber: 5,
                 axisLabel: {
-                    interval: 0,
                     margin: 14,
                     // 函数模板
                     formatter(value) {
@@ -624,7 +646,7 @@
                         return result;
                     },
                     textStyle: {
-                        color: '#65708A'
+                        color: 'rgba(101, 112, 138, 1)'
                     }
                 },
                 splitLine: {
@@ -634,106 +656,100 @@
                     }
                 },
                 axisTick: {
-                    show: false
+                    show: false,
+                    interval: 0
                 },
                 axisLine: { show: false }
             },
             grid: {
-                show: 'false',
+                show: true,
                 borderWidth: 0,
-                height: 100,
+                height: 165,
                 containLabel: true,
             },
-            series: [{
-                type: 'line',
-                data: [1000, 2100, 1000, 3200, 800, 2000, 4680],
-                smooth: true,
-                itemStyle: {
-                    normal: {
-                        color: '#407AFF', // 改变折线点颜色
-                        borderWidth: 8,
-                        borderColor: 'rgba(64, 122, 255, 0.38)',
-                        label: {
-                            show: true,
-                            formatter(name, value, params) {
-                                if(params == 4680) {
-                                    return params + "人"
-                                }
-                            }
-                        }
-                    },
+            series: [
+                {
+                    type: 'line',
+                    data: [1000, 2100, 1000, 3200, 800, 2000, 4680],
+                    smooth: true,
+                    symbolSize: 9,
+                    itemStyle: {
+                        normal: {
+                            color: 'rgba(68, 93, 220, 1)', // 改变折线点颜色
+                            borderColor: 'rgba(64, 122, 255, 0.38)',
+                            lineStyle: {
+                                width: 4
+                            },
+                        },
+                        shadowBlur: 10,
+                        shadowColor: 'rgba(0, 0, 0, 0.7)'
+                    }
                 }
-            }]
+            ]
         }
         oneChart.setOption(oneoption)
 
         // 右侧数据
         const lineChart = echarts.init(document.getElementById("echarts-line-chart"))
         const lineoption = {
-            xAxis: {
-                type: 'category',
-                data: ['优抚总人数', '军转总人数', '安置总人数'],
-                axisLabel: { show: true },
-                splitLine: { show: false},
-                axisLine: {
-                    show: true,
-                    lineStyle: {
-                        type: 'solid',
-                        color: '#ccc',
-                        width: 1
-                    }
-                },
-                axisTick: { show: false}
-            },
-            yAxis: [{
-                type: 'value',
-                splitLine: { show: false },
-                axisLabel: { show: false },
-                axisLine: { show: false }
-            }],
+            color: ['#5654F5', '#4CA8FF', '#FBA33F'],
             legend: {
                 data: ['优抚总人数', '军转总人数', '安置总人数'],
+                left: 'right',
+                top: 'center',
                 orient: 'vertical',
-                y: 'center',
-                x: 'right',
-                padding: [0, 128, 0, 0],
-                itemGap: 18,
-                align: 'left',
+                padding: 156,
                 textStyle: {
-                    color: '#000',
-                    fontSize: 14,
-                    fontFamily: 'Source Han Sans CN',
-                    fontWeight: 'bold'
-                }
+                    color: '#2C2C2C'
+                },
             },
             grid: {
-                borderWidth: 0,
+                containLabel: true,
                 width: 200,
-                height: 150
+                height: 156
+            },
+            xAxis: {
+                type: 'category',
+                axisLine: {
+                    show: true
+                }
+            },
+            yAxis: {
+                type: 'value',
+                splitLine: {
+                    show: false
+                },
+                axisLabel: {
+                    show: false
+                }
             },
             series: [
                 {
-                    data: [4680, 1680, 2680],
+                    name: '优抚总人数',
                     type: 'bar',
-                    width: '200',
+                    data: [4680],
                     barWidth: 30,
-                    itemStyle: {
-                        normal: {
-                            barBorderRadius: [6, 6, 0, 0],
-                            label: {
-                                show: true,
-                                position: 'top',
-                                textStyle: {
-                                    color: '#000'
-                                }
-                            },
-                            color: function (params, index) {
-                                const colorList = ['#5654F5', '#4CA8FF', '#FBA33F']
-                                return colorList[index]
-                            }
-                        },
-                        color: '#5654F5',
-                    }
+                    barGap:'55%',
+                    label: { show: true, position: 'top', fontFamily: 'Source Han Sans CN', color: '#666666' },
+                    itemStyle: { borderRadius: [8, 4, 0, 0], shadowBlur: 10, shadowColor: 'rgba(0, 0, 0, 0.5)' }
+                },
+                {
+                    name: '军转总人数',
+                    type: 'bar',
+                    data: [1680],
+                    barWidth: 30,
+                    barGap:'55%',
+                    label: { show: true, position: 'top', fontFamily: 'Source Han Sans CN', color: '#666666' },
+                    itemStyle: { borderRadius: [8, 4, 0, 0], shadowBlur: 10, shadowColor: 'rgba(0, 0, 0, 0.5)' }
+                },
+                {
+                    name: '安置总人数',
+                    type: 'bar',
+                    data: [2680],
+                    barWidth: 30,
+                    barGap:'55%',
+                    label: { show: true, position: 'top', fontFamily: 'Source Han Sans CN', color: '#666666' },
+                    itemStyle: { borderRadius: [8, 4, 0, 0], shadowBlur: 10, shadowColor: 'rgba(0, 0, 0, 0.5)' }
                 }
             ]
         };

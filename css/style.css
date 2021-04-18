@@ -38,10 +38,18 @@ h5 {
   font-weight: 600;
 }
 
+
+
+.nav-second-level li {
+  padding: 10px 0;
+  background-color: rgba(9, 57, 59, 1);
+  box-sizing: border-box;
+}
+
 .nav > li > a {
   color: #a7b1c2;
   font-weight: 600;
-  padding: 14px 20px 14px 25px;
+  padding: 14px 20px 14px 30px;
 }
 .nav.navbar-right > li > a {
   color: #999c9e;
@@ -49,11 +57,25 @@ h5 {
 .nav > li.active > a {
   color: #ffffff;
 }
-.navbar-default .nav > li > a:hover,
+
+/* .navbar-default .nav-second-level > li:hover {
+  background-color: rgba(39, 122, 255, 1);
+} */
+
+.navbar-default .nav > li > a:hover {
+  background-color: transparent;
+  color: white; 
+}
+
 .navbar-default .nav > li > a:focus {
-  background-color: #277affb4;
+  background-color: rgba(39, 122, 255, 1);
   color: white;
 }
+
+.navbar-default .nav > li > a:focus {
+  background-color: transparent;
+}
+
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
@@ -77,14 +99,15 @@ h5 {
   display: inline-block;
 }
 .navbar-top-links li:last-child {
-  margin-right: 40px;
+  margin-right: 0px;
 }
 
 body.body-small .navbar-top-links li:last-child {
     margin-right: 10px;
 }
 .navbar-top-links li a {
-  padding: 20px 10px;
+  padding: 20px 5px;
+  padding-right: 25px;
   min-height: 50px;
 }
 .dropdown-menu {
@@ -168,10 +191,11 @@ body.body-small .navbar-top-links li:last-child {
   transition: all 0.5s;
 }
 .nav > li.active {
-  background-color: #277AFF;
+  background-color: transparent;
 }
 .nav.nav-second-level > li.active {
   border: none;
+  background-color: rgba(39, 122, 255, 1);
 }
 .nav.nav-second-level.collapse[style] {
   height: auto !important;
@@ -229,16 +253,25 @@ body.body-small .navbar-top-links li:last-child {
 .nav-third-level li {
   border-bottom: none !important;
 }
+
+.nav-second-level li:hover a {
+  color: rgba(255, 255, 255, 1);
+}
 .nav-second-level li a {
   padding: 7px 10px 7px 10px;
-  padding-left: 52px;
+  /* padding-left: 52px; */
+  text-align: center;
+  font-family: 'Source Han Sans CN';
+  font-weight: bold;
+  font-size: 13px;
+  color: rgba(101, 112, 138, 1);
 }
 .nav-third-level li a {
   padding-left: 62px;
 }
-.nav-second-level li:last-child {
+/* .nav-second-level li:last-child {
   margin-bottom: 10px;
-}
+} */
 body:not(.fixed-sidebar):not(.canvas-menu).mini-navbar .nav li:hover > .nav-second-level,
 .mini-navbar .nav li:focus > .nav-second-level {
   display: block;
@@ -320,7 +353,7 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
 }
 .navbar-fixed-top,
 .navbar-static-top {
-  background: #f3f3f4;
+  /* background: #f3f3f4; */
 }
 .fixed-nav #wrapper {
   margin-top: 60px;
@@ -2916,7 +2949,8 @@ a:focus {
   text-decoration: none;
 }
 .border-bottom {
-  border-bottom: 1px solid #e7eaec !important;
+  /* border-bottom: 1px solid #e7eaec !important; */
+  background-color: #fff;
 }
 .font-bold {
   font-weight: 600;
@@ -3097,7 +3131,8 @@ body.body-small .footer.fixed {
 /* PANELS */
 .page-heading {
   border-top: 0;
-  padding: 0px 10px 20px 10px;
+  padding: 12px 0 10px 20px;
+  background-color: transparent;
 }
 .panel-heading h1,
 .panel-heading h2 {
@@ -3265,12 +3300,17 @@ img.circle-border {
   cursor: move;
 }
 .breadcrumb {
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
+  background-color: transparent;
   padding: 0;
   margin-bottom: 0;
 }
 .breadcrumb > li a {
-  color: inherit;
+  color: rgba(101, 112, 138, 1);
+}
+
+.breadcrumb > li strong {
+  color: rgba(68, 93, 220, 1);
 }
 .breadcrumb > .active {
   color: inherit;
@@ -3403,7 +3443,7 @@ table.table-mail tr td {
   background-color: #f3f3f4;
 }
 .white-bg {
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
 }
 .navy-bg {
   background-color: #1ab394;
@@ -3747,7 +3787,7 @@ a.close-canvas-menu:hover {
   margin-right: 5px;
 }
 .m-r-sm {
-  margin-right: 10px;
+  margin-right: 0px;
 }
 .m-r {
   margin-right: 15px;
@@ -5640,6 +5680,7 @@ body.rtls #page-wrapper {
 }
 body.rtls .nav-second-level li a {
   padding: 7px 35px 7px 10px;
+  background-color: rgba(9, 57, 59, 1);
 }
 body.rtls .ibox-title h5 {
   float: right;
@@ -5987,6 +6028,7 @@ body.skin-1 {
 }
 .skin-1 .navbar-static-top {
   background: #ffffff;
+
 }
 .skin-1 .dashboard-header {
   background: transparent;
@@ -6085,6 +6127,11 @@ body.skin-2 {
 .skin-2 .nav > li > a,
 .skin-2 .welcome-message {
   color: #edf6ff;
+  margin-right: 0;
+}
+.navbar-top-links .welcome-message > a {
+  padding: 20px 0;
+  margin-right: 10px;
 }
 .skin-2 #top-search::-moz-placeholder {
   color: #edf6ff;
@@ -6404,4 +6451,76 @@ body.skin-3 {
 /* ECHARTS  */
 .echarts {
     height: 240px;
+}
+
+.breadcrumb li+li::before {
+  content: '>';
+}
+
+.col-lg-12,
+.col-lg-8,
+.col-lg-3,
+.col-lg-6,
+.col_lg_9,
+.col-lg-4 {
+    padding: 0;
+}
+
+.btn-sm {
+  padding: 8px 24px;
+  background: #445DDC;
+  font-family: Source Han Sans CN;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  border-radius: 5px;
+}
+.form-horizontal .form-group {
+  margin: 0;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.form-group input {
+  background: #E9EBF2;
+  border-radius: 8px;
+}
+
+.control-label {
+  padding-right: 8px;
+}
+/* 日期 */
+.layer-date {
+  width: 164px;
+  height: 32px;
+  padding-left: 21px;
+  padding-right: 21px;
+}
+
+.layer-date::placeholder,
+.layer-date {
+  font-size: 12px;
+  font-family: Source Han Sans CN;
+  font-weight: 500;
+  color: #65708A;
+}
+/* 下拉框 */
+select {
+  min-width: 120px;
+  height: 32px;
+  border: none;
+  line-height: 1;
+  appearance: none;
+  background: url(../icon/下三角形.png) no-repeat scroll right center transparent;
+  background-position-x: 90%;
+  background-size: 0.9rem 0.9rem;
+  padding: 0 14px;
+  padding-right: 15%;
+  outline: none;
+  background-color: #E9EBF2;
+  border-radius: 8px;
+}
+
+select option {
+  background: transparent;
 }

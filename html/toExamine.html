@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="renderer" content="webkit">
+
+  <title>审核业务</title>
+
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../font-awesome/css/font-awesome.css" rel="stylesheet">
+
+  <!-- Morris -->
+  <link href="../css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
+  <!-- Gritter -->
+  <link href="../js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+  <link href="../css/animate.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+
+  <style>
+    .navbar-default {
+      height: 100%;
+      background: #0E5A43;
+      box-shadow: 11px 4px 6px rgba(101, 112, 138, 0.1);
+      opacity: 1;
+    }
+
+    /* 局内样式 */
+
+    label,
+    input[type=checkbox],
+    input[type=radio] {
+      margin: 0;
+    }
+
+    input::placeholder {
+      font-size: 12px;
+    }
+
+    input[type=radio] {
+      vertical-align: middle;
+      margin-right: 3px;
+      color: #65708A;
+      font-size: 12px;
+    }
+
+    .wrapper-content .row>div {
+      height: 100%;
+    }
+
+    .wrapper-content .row>div>.ibox {
+      height: 100%;
+      background-color: #fff;
+      border-radius: 10px;
+    }
+
+    .wrapper-content .row>div>.ibox .title {
+      height: 60px;
+      padding: 14px 30px;
+    }
+
+    .wrapper-content .row>div>.ibox .title ul {
+      display: flex;
+      padding: 0;
+      margin: 0;
+      justify-content: space-between;
+    }
+
+    .wrapper-content .row>div>.ibox .title ul li {
+      list-style: none;
+    }
+
+    .wrapper-content .row>div>.ibox .title ul li a {
+      display: inline-block;
+      padding: 5px 18px;
+      font-size: 13px;
+      font-weight: bold;
+      border-radius: 5px;
+      color: #65708A;
+    }
+
+    .wrapper-content .row>div>.ibox .title ul li.active a {
+      background-color: #445DDC;
+      color: #FFFFFF;
+    }
+
+    .content {
+      padding-bottom: 32px;
+    }
+
+    .content .form-horizontal .row {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0;
+      padding-left: 25px;
+    }
+
+    .content .form-horizontal .row:nth-of-type(odd) {
+      background: #F6F8FB;
+    }
+
+    .content .form-horizontal .form-group {
+      width: 50%;
+      height: 32px;
+      margin: 12px 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .content .form-horizontal .form-group .control-label {
+      width: 56px;
+      font-size: 12px;
+      color: #304167;
+      padding: 0;
+      margin-right: 18px;
+      text-align: center;
+    }
+
+    .content .form-horizontal .form-group>div,
+    .form-control {
+      height: 100%;
+    }
+
+    .form_bottom {
+      margin-top: 75px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form_bottom .form-group {
+      margin-bottom: 0;
+    }
+
+    /* 右边 */
+    .content-right {
+      padding: 38px 35px 186px 66px;
+    }
+
+    .content-right .title-img {
+      padding: 8px 93px 0 63px;
+    }
+
+    .content-right .title-img img {
+      width: 187px;
+      height: 264px;
+      border-radius: 10px;
+      margin-bottom: 53px;
+    }
+
+    .content-right .content {
+      padding-right: 25px;
+      margin-bottom: 110px;
+    }
+
+    .content-right .content p {
+      font-size: 13px;
+      color: #65708A;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      margin: 12px 0;
+    }
+
+    .content-right .content p label {
+      display: inline-block;
+      width: 53px;
+      text-align-last: justify;
+      letter-spacing: 0;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="wrapper" style="height: 100%;">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+      <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+          <li
+            style="padding: 30px 15px; font-size: 14px; color: #fff; font-family: 'Courier New', Courier, monospace; font-weight: 600;">
+            <span class="title">番禺区退役军人信息管理平台</span>
+          </li>
+          <li>
+            <a href="../index.html"><i class="fa fa-th-large"></i> <span class="nav-label">首页</span></a>
+          </li>
+          <li class="active">
+            <a href="index.html"><i class="fa fa-files-o"></i> <span class="nav-label">待办业务</span><span
+                class="fa arrow"></span></a>
+            <ul class="nav nav-second-level">
+              <li><a href="./examine.html">待审核业务</a></li>
+              <li class="active"><a href="./approval.html">待审批业务</a></li>
+              <li><a href="./processed.html">已处理记录</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">军人信息管理</span><span
+                class="fa arrow"></span></a>
+            <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+          </li>
+          <li>
+            <a href="../index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">军人优抚管理</span><span
+                class="fa arrow"></span></a>
+            <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+          </li>
+          <li>
+            <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">军转信息管理</span><span
+                class="fa arrow"></span></a>
+            <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+          </li>
+          <li>
+            <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">安置接收管理</span><span
+                class="fa arrow"></span></a>
+            <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+          </li>
+          <li>
+            <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">信息发布管理</span><span
+                class="fa arrow"></span></a>
+            <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+          </li>
+          <li>
+            <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">数据统计分析</span><span
+                class="fa arrow"></span></a>
+            <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+          </li>
+          <li>
+            <a href="index.html#"><i class="fa fa-files-o"></i> <span class="nav-label">系统管理</span><span
+                class="fa arrow"></span></a>
+            <!-- <ul class="nav nav-second-level">
+                            <li><a href="search_results.html">搜索结果</a>
+                            </li>
+                            <li><a href="lockscreen.html">登录超时</a>
+                            </li>
+                            <li><a href="404.html">404页面</a>
+                            </li>
+                            <li><a href="500.html">500页面</a>
+                            </li>
+                            <li><a href="empty_page.html">空白页</a>
+                            </li>
+                        </ul> -->
+          </li>
+        </ul>
+
+      </div>
+    </nav>
+
+    <div id="page-wrapper" style="min-height: 100%; background-color: #EDF1F9; overflow: hidden;"
+      class="gray-bg dashbard-1">
+      <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0; height: 50px;">
+          <ul class="nav navbar-top-links navbar-right">
+            <li>
+              <span class="m-r-sm text-muted welcome-message">
+                <a href="index.html" title="返回首页">
+                  <img alt="image" style="width: 20px; height: 20px;" class="img-circle"
+                    src="../img/profile_small.jpg" />
+                </a>我叫管理员
+              </span>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle count-info" data-toggle="dropdown" href="index.html#">
+                <img alt="image" class="img-circle" src="../icon/下三角形.png" />
+              </a>
+              <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                <li><a href="form_avatar.html">修改头像</a>
+                </li>
+                <li><a href="profile.html">个人资料</a>
+                </li>
+                <li><a href="contacts.html">联系我们</a>
+                </li>
+                <li><a href="mailbox.html">信箱</a>
+                </li>
+                <li class="divider"></li>
+                <li><a href="login.html">安全退出</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="login.html">
+                <img width="14px" height="14px" src="../icon/组 2.png" alt="">
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-9" style="padding: 0;">
+          <ol class="breadcrumb">
+            <li>
+              <a href="../index.html">待办业务</a>
+            </li>
+            <li>
+              <a href="./approval.html">待审批业务</a>
+            </li>
+            <li>
+              <strong>审批</strong>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="wrapper wrapper-content animated fadeInRight" style="padding-top: 0; height: 100%; padding: 0 12px;">
+        <div class="row">
+          <div class="col-lg-8" style="padding-right: 10px;">
+            <div class="ibox">
+              <div class="title">
+                <ul>
+                  <li class="active">
+                    <a href="#">基本信息</a>
+                  </li>
+                  <li>
+                    <a href="#">类别信息</a>
+                  </li>
+                  <li>
+                    <a href="#">生活费来源</a>
+                  </li>
+                  <li>
+                    <a href="#">医疗和养老</a>
+                  </li>
+                  <li>
+                    <a href="#">户口簿退伍证等档案资料</a>
+                  </li>
+                  <li>
+                    <a href="#">其他信息</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="content">
+                <form class="form-horizontal">
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">民&emsp;&emsp;族</label>
+
+                      <div class="col-lg-8">
+                        <select name="family" id="family">
+                          <option value="汉族">汉族</option>
+                          <option value="壮族">壮族</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">户口类型</label>
+
+                      <div class="col-lg-8">
+                        <select name="reg" id="reg">
+                          <option value="农业">农业</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">婚&emsp;&emsp;否</label>
+
+                      <div class="col-lg-8" style="line-height: 32px;">
+                        <label for="yes_marr" style="margin-right: 8px;">
+                          <input type="radio" name="marr" id="yes_marr" checked>已婚
+                        </label>
+                        <label for="no_marr">
+                          <input type="radio" name="marr" id="no_marr">未婚
+                        </label>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">联系电话</label>
+
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" placeholder="13000000000" style="width: 200px;">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">行政区划</label>
+
+                      <div class="col-lg-8">
+                        <select name="division" id="division" style="width: 200px;">
+                          <option value="番禺区市桥街道办事处">番禺区市桥街道办事处</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">生活能力</label>
+
+                      <div class="col-lg-8">
+                        <select name="life" id="life">
+                          <option value="农业">农业</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">入伍时间(参与工作)</label>
+
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">退伍时间(离退休)</label>
+
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">劳动能力</label>
+
+                      <div class="col-lg-8">
+                        <select name="labour" id="labour" style="width: 200px;">
+                          <option value="完全丧失劳动能力">完全丧失劳动能力</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">优抚对象状态</label>
+
+                      <div class="col-lg-8">
+                        <select name="treatment" id="treatment">
+                          <option value="享受待遇">享受待遇</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">就业情况</label>
+
+                      <div class="col-lg-8">
+                        <select name="obtain" id="obtain" style="width: 200px;">
+                          <option value="享受待遇">无工作</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">是否享受低保待遇</label>
+
+                      <div class="col-lg-8" style="line-height: 32px;">
+                        <label for="yes_treatment" style="margin-right: 8px;">
+                          <input type="radio" name="treatment" id="yes_treatment" checked>是
+                        </label>
+                        <label for="no_treatment">
+                          <input type="radio" name="treatment" id="no_treatment">否
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">户口簿上地址</label>
+
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" placeholder="番禺区XX路XX路XX小区XX号">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">实际居住地址</label>
+
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" placeholder="番禺区XX路XX路XX小区XX号">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">户口簿上住址类别</label>
+
+                      <div class="col-lg-8">
+                        <select name="address" id="address">
+                          <option value="农村">农村</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">工作单位</label>
+
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" placeholder="XXXX工作单位">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">伤残等级</label>
+
+                      <div class="col-lg-8">
+                        <select name="level" id="level">
+                          <option value="一级">一级</option>
+                          <option value="二级">二级</option>
+                          <option value="三级">三级</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">伤残属别</label>
+
+                      <div class="col-lg-8">
+                        <select name="genus" id="genus">
+                          <option value="在乡">在乡</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">伤残性质</label>
+
+                      <div class="col-lg-8">
+                        <select name="nature" id="nature">
+                          <option value="因公">因公</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group">
+                      <label class="col-lg-3 control-label">备&emsp;&emsp;注</label>
+
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" placeholder="我是备注我是备注我是备注">
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
+                <div class="form_bottom">
+                  <div class="form-group">
+                    <div class="col-lg-offset-3 col-lg-8">
+                      <button class="btn btn-sm btn-white">确定</button>
+                    </div>
+                  </div>
+
+                  <div class="form-group" style="margin-left: 10px;">
+                    <div class="col-lg-offset-3 col-lg-8">
+                      <button class="btn btn-sm btn-white" style="background: #E9EBF2; color: #65708A;">取消</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4" style="padding-left: 10px;">
+            <div class="ibox">
+              <div class="content-right">
+                <div class="title-img">
+                  <img src="../img/a1.jpg" alt="">
+                </div>
+                <div class="content">
+                  <p><label>姓名</label>：羊拐</p>
+                  <p><label>身份证</label>：450521199632165498</p>
+                  <p><label>性别</label>：男</p>
+                  <p><label>出生日期</label>：1985年08月06日</p>
+                </div>
+                <div class="bottom">
+                  <div class="col-lg-offset-3 col-lg-8">
+                    <button class="btn btn-sm btn-white">编辑</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mainly scripts -->
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/plugins/metisMenu/jquery.metisMenu.js"></script>
+  <script src="../js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+  <script src="../js/hplus.js"></script>
+  <script src="../js/plugins/pace/pace.min.js"></script>
+
+</body>
+
+</html>
